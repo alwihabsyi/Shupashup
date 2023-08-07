@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Shupashup</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tagLine">The Right Address\nFor Shopping\nAnyday</string>
+    <string name="tvSlogan">it is now very easy to reach the\nbest quality among all the\nproducts on the internet!</string>
+</resources>

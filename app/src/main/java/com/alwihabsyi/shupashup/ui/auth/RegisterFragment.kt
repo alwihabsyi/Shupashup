@@ -12,15 +12,21 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
+import com.alwihabsyi.shupashup.R
 import com.alwihabsyi.shupashup.data.User
 import com.alwihabsyi.shupashup.databinding.FragmentLoginBinding
 import com.alwihabsyi.shupashup.databinding.FragmentRegisterBinding
+import com.alwihabsyi.shupashup.util.RegisterValidation
 import com.alwihabsyi.shupashup.util.Resource
 import com.alwihabsyi.shupashup.util.toast
 import com.alwihabsyi.shupashup.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 private val TAG = "RegisterFragment"
 @AndroidEntryPoint
@@ -51,6 +57,10 @@ class RegisterFragment : Fragment() {
                 val password = etPassword.text.toString()
                 viewModel.createAccountWithEmailAndPassword(user, password)
             }
+
+            tvLogin.setOnClickListener {
+                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            }
         }
 
         viewModel.register.observe(viewLifecycleOwner){
@@ -69,6 +79,29 @@ class RegisterFragment : Fragment() {
             }
         }
 
+        lifecycleScope.launch{
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.validation.collect(){ validation ->
+                    if (validation.email is RegisterValidation.Failed){
+                         withContext(Dispatchers.Main){
+                             binding.etEmail.apply {
+                                 requestFocus()
+                                 error = validation.email.message
+                             }
+                         }
+                    }
+
+                    if (validation.password is RegisterValidation.Failed){
+                        withContext(Dispatchers.Main){
+                            binding.etPassword.apply {
+                                requestFocus()
+                                error = validation.password.message
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

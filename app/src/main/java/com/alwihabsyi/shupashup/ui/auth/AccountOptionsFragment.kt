@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.alwihabsyi.shupashup.R
 import com.alwihabsyi.shupashup.databinding.FragmentAccountOptionsBinding
 import com.alwihabsyi.shupashup.databinding.FragmentLoginBinding
 
@@ -23,6 +25,17 @@ class AccountOptionsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.apply {
+            btnLogin.setOnClickListener {
+                findNavController().navigate(R.id.action_accountOptionsFragment_to_loginFragment)
+            }
+
+            btnRegisterAccOptions.setOnClickListener {
+                findNavController().navigate(R.id.action_accountOptionsFragment_to_registerFragment)
+            }
+        }
+
     }
 
 }

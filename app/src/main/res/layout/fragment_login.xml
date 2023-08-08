@@ -100,13 +100,14 @@
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@id/etPassword" />
 
-        <com.google.android.material.button.MaterialButton
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/btnLogin"
             style="@style/blueButtonStyle"
             android:layout_width="@dimen/mediumButtonWidth"
             android:layout_height="@dimen/mediumButtonHeight"
             android:layout_marginTop="30dp"
             android:text="Login"
+            app:spinning_bar_color="@color/white"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />

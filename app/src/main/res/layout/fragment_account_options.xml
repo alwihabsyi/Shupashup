@@ -54,23 +54,25 @@
             android:text="@string/tvSlogan"
             android:layout_marginTop="15dp"/>
 
-        <com.google.android.material.button.MaterialButton
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/btnRegisterAccOptions"
             android:layout_width="@dimen/mediumButtonWidth"
             android:layout_height="@dimen/mediumButtonHeight"
             style="@style/blueButtonStyle"
             android:text="Register"
+            app:spinning_bar_color="@color/white"
             app:layout_constraintTop_toBottomOf="@id/tvSlogan"
             app:layout_constraintStart_toStartOf="@id/tvSlogan"
             app:layout_constraintEnd_toEndOf="@id/tvSlogan"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <com.google.android.material.button.MaterialButton
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/btnLogin"
             android:layout_width="@dimen/mediumButtonWidth"
             android:layout_height="@dimen/mediumButtonHeight"
             style="@style/whiteButtonStyle"
             android:text="Login"
+            app:spinning_bar_color="@color/white"
             app:layout_constraintTop_toBottomOf="@id/btnRegisterAccOptions"
             app:layout_constraintStart_toStartOf="@id/tvSlogan"
             app:layout_constraintEnd_toEndOf="@id/tvSlogan"

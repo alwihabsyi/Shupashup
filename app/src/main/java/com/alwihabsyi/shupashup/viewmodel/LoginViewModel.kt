@@ -3,6 +3,7 @@ package com.alwihabsyi.shupashup.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.alwihabsyi.shupashup.data.User
 import com.alwihabsyi.shupashup.util.RegisterFieldsState
 import com.alwihabsyi.shupashup.util.RegisterValidation
@@ -13,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
@@ -26,6 +28,9 @@ class LoginViewModel @Inject constructor(
 
     private val _validation = Channel<RegisterFieldsState>()
     val validation = _validation.receiveAsFlow()
+
+    private val _resetPassword = MutableLiveData<Resource<String>>()
+    val resetPassword: LiveData<Resource<String>> = _resetPassword
 
     fun login(email: String, password: String){
         if(checkValidation(email, password)){
@@ -53,6 +58,19 @@ class LoginViewModel @Inject constructor(
 
         return emailValidation is RegisterValidation.Success &&
                 passwordValidation is RegisterValidation.Success
+    }
+
+    fun resetPassword(email: String) {
+//        viewModelScope.launch {
+//        }
+        _resetPassword.value = Resource.Loading
+        firebaseAuth.sendPasswordResetEmail(email)
+            .addOnSuccessListener {
+                _resetPassword.value = Resource.Success("The password reset link is sent to your email")
+            }
+            .addOnFailureListener {
+                _resetPassword.value = Resource.Error(it.localizedMessage)
+            }
     }
 
 }

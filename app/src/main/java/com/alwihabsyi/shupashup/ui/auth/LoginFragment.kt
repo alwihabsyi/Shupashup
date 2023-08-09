@@ -5,19 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import br.com.simplepass.loadingbutton.customViews.CircularProgressButton
 import com.alwihabsyi.shupashup.R
 import com.alwihabsyi.shupashup.databinding.FragmentLoginBinding
 import com.alwihabsyi.shupashup.ui.shop.ShoppingActivity
 import com.alwihabsyi.shupashup.util.RegisterValidation
 import com.alwihabsyi.shupashup.util.Resource
+import com.alwihabsyi.shupashup.util.setUpBottomSheetDialog
 import com.alwihabsyi.shupashup.util.toast
 import com.alwihabsyi.shupashup.viewmodel.LoginViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -53,6 +57,25 @@ class LoginFragment: Fragment() {
                 findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
             }
 
+        }
+
+        binding.tvForgotPassword.setOnClickListener {
+            setUpBottomSheetDialog { email ->
+                viewModel.resetPassword(email)
+            }
+        }
+
+        viewModel.resetPassword.observe(viewLifecycleOwner){
+            when(it) {
+                is Resource.Loading -> {
+                }
+                is Resource.Success -> {
+                    Snackbar.make(requireView(), it.data, Snackbar.LENGTH_SHORT).show()
+                }
+                is Resource.Error -> {
+                    Snackbar.make(requireView(), it.message.toString(), Snackbar.LENGTH_SHORT).show()
+                }
+            }
         }
 
         viewModel.login.observe(viewLifecycleOwner){

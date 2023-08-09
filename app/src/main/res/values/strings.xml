@@ -4,4 +4,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tagLine">The Right Address\nFor Shopping\nAnyday</string>
     <string name="tvSlogan">it is now very easy to reach the\nbest quality among all the\nproducts on the internet!</string>
+    <string name="send_to_email">We will send the password reset link to your email</string>
 </resources>

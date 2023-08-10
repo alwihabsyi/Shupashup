@@ -3,8 +3,6 @@ package com.alwihabsyi.shupashup.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.alwihabsyi.shupashup.data.User
 import com.alwihabsyi.shupashup.util.RegisterFieldsState
 import com.alwihabsyi.shupashup.util.RegisterValidation
 import com.alwihabsyi.shupashup.util.Resource
@@ -14,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 

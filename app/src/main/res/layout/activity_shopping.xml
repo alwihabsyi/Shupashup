@@ -8,30 +8,31 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/shopHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:navGraph="@navigation/shop_graph"
-        android:name="androidx.navigation.fragment.NavHostFragment"
         app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"/>
+        app:navGraph="@navigation/shop_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        app:menu="@menu/bottom_navigation_menu"
-        app:labelVisibilityMode="unlabeled"
         android:background="@drawable/bottom_navigation_background"
+        app:itemActiveIndicatorStyle="@style/bottomNavActiveStyle"
         app:elevation="0dp"
-        app:itemPaddingTop="10dp"
-        app:itemPaddingBottom="10dp"
-        app:itemRippleColor="@color/g_white"
         app:itemIconTint="@drawable/bottom_nav_item_background"
-        app:layout_constraintStart_toStartOf="parent"
+        app:itemPaddingBottom="10dp"
+        app:itemPaddingTop="10dp"
+        app:itemRippleColor="#B5B5B5"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
@@ -46,4 +47,12 @@ fun Fragment.setUpBottomSheetDialog(
     btnCancel.setOnClickListener {
         dialog.dismiss()
     }
+}
+
+fun View.show(){
+    visibility = View.VISIBLE
+}
+
+fun View.hide(){
+    visibility = View.INVISIBLE
 }

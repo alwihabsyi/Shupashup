@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,8 +21,9 @@ import com.alwihabsyi.shupashup.viewmodel.MainCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 private val TAG = "MainCategoryFragment"
+
 @AndroidEntryPoint
-class MainCategoryFragment: Fragment() {
+class MainCategoryFragment : Fragment() {
 
     private lateinit var binding: FragmentMainCategoryBinding
     private lateinit var specialProductsAdapter: SpecialProductsAdapter
@@ -49,15 +51,17 @@ class MainCategoryFragment: Fragment() {
     }
 
     private fun observer() {
-        viewModel.specialProducts.observe(viewLifecycleOwner){
-            when(it) {
+        viewModel.specialProducts.observe(viewLifecycleOwner) {
+            when (it) {
                 is Resource.Loading -> {
                     binding.mainCategoryProgressBar.show()
                 }
+
                 is Resource.Success -> {
                     specialProductsAdapter.differ.submitList(it.data)
                     binding.mainCategoryProgressBar.hide()
                 }
+
                 is Resource.Error -> {
                     binding.mainCategoryProgressBar.hide()
                     toast(it.message.toString())
@@ -65,15 +69,17 @@ class MainCategoryFragment: Fragment() {
             }
         }
 
-        viewModel.bestDealsProducts.observe(viewLifecycleOwner){
-            when(it) {
+        viewModel.bestDealsProducts.observe(viewLifecycleOwner) {
+            when (it) {
                 is Resource.Loading -> {
                     binding.mainCategoryProgressBar.show()
                 }
+
                 is Resource.Success -> {
                     bestDealsAdapter.differ.submitList(it.data)
                     binding.mainCategoryProgressBar.hide()
                 }
+
                 is Resource.Error -> {
                     binding.mainCategoryProgressBar.hide()
                     toast(it.message.toString())
@@ -81,27 +87,36 @@ class MainCategoryFragment: Fragment() {
             }
         }
 
-        viewModel.bestProducts.observe(viewLifecycleOwner){
-            when(it) {
+        viewModel.bestProducts.observe(viewLifecycleOwner) {
+            when (it) {
                 is Resource.Loading -> {
-                    binding.mainCategoryProgressBar.show()
+                    binding.bestProductProgressBar.show()
                 }
+
                 is Resource.Success -> {
                     bestProductsAdapter.differ.submitList(it.data)
-                    binding.mainCategoryProgressBar.hide()
+                    binding.bestProductProgressBar.hide()
                 }
+
                 is Resource.Error -> {
-                    binding.mainCategoryProgressBar.hide()
+                    binding.bestProductProgressBar.hide()
                     toast(it.message.toString())
                 }
             }
         }
+
+        binding.nestedScrollMainCategory.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
+            if (v.getChildAt(0).bottom <= v.height + scrollY){
+                viewModel.fetchBestProducts()
+            }
+        })
     }
 
     private fun setupBestProductsRv() {
         bestProductsAdapter = BestProductAdapter()
         binding.rvBestProducts.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            layoutManager =
+                GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             adapter = bestProductsAdapter
         }
     }
@@ -109,7 +124,8 @@ class MainCategoryFragment: Fragment() {
     private fun setupBestDealsRv() {
         bestDealsAdapter = BestDealsAdapter()
         binding.rvBestDealsProducts.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = bestDealsAdapter
         }
     }
@@ -117,7 +133,8 @@ class MainCategoryFragment: Fragment() {
     private fun setupSpecialProductsRv() {
         specialProductsAdapter = SpecialProductsAdapter()
         binding.rvSpecialProducts.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = specialProductsAdapter
         }
     }

@@ -7,11 +7,10 @@ import com.alwihabsyi.shupashup.data.User
 import com.alwihabsyi.shupashup.util.RegisterFieldsState
 import com.alwihabsyi.shupashup.util.RegisterValidation
 import com.alwihabsyi.shupashup.util.Resource
-import com.alwihabsyi.shupashup.util.constants.USER_COLLECTION
+import com.alwihabsyi.shupashup.util.Constants.USER_COLLECTION
 import com.alwihabsyi.shupashup.util.validateEmail
 import com.alwihabsyi.shupashup.util.validatePassword
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel

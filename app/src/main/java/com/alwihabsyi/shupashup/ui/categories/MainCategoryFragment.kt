@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alwihabsyi.shupashup.adapters.BestDealsAdapter
+import com.alwihabsyi.shupashup.adapters.BestProductAdapter
 import com.alwihabsyi.shupashup.adapters.SpecialProductsAdapter
 import com.alwihabsyi.shupashup.databinding.FragmentMainCategoryBinding
 import com.alwihabsyi.shupashup.util.Resource
@@ -22,6 +25,8 @@ class MainCategoryFragment: Fragment() {
 
     private lateinit var binding: FragmentMainCategoryBinding
     private lateinit var specialProductsAdapter: SpecialProductsAdapter
+    private lateinit var bestDealsAdapter: BestDealsAdapter
+    private lateinit var bestProductsAdapter: BestProductAdapter
     private val viewModel by viewModels<MainCategoryViewModel>()
 
     override fun onCreateView(
@@ -37,6 +42,13 @@ class MainCategoryFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupSpecialProductsRv()
+        setupBestDealsRv()
+        setupBestProductsRv()
+        observer()
+
+    }
+
+    private fun observer() {
         viewModel.specialProducts.observe(viewLifecycleOwner){
             when(it) {
                 is Resource.Loading -> {
@@ -53,6 +65,53 @@ class MainCategoryFragment: Fragment() {
             }
         }
 
+        viewModel.bestDealsProducts.observe(viewLifecycleOwner){
+            when(it) {
+                is Resource.Loading -> {
+                    binding.mainCategoryProgressBar.show()
+                }
+                is Resource.Success -> {
+                    bestDealsAdapter.differ.submitList(it.data)
+                    binding.mainCategoryProgressBar.hide()
+                }
+                is Resource.Error -> {
+                    binding.mainCategoryProgressBar.hide()
+                    toast(it.message.toString())
+                }
+            }
+        }
+
+        viewModel.bestProducts.observe(viewLifecycleOwner){
+            when(it) {
+                is Resource.Loading -> {
+                    binding.mainCategoryProgressBar.show()
+                }
+                is Resource.Success -> {
+                    bestProductsAdapter.differ.submitList(it.data)
+                    binding.mainCategoryProgressBar.hide()
+                }
+                is Resource.Error -> {
+                    binding.mainCategoryProgressBar.hide()
+                    toast(it.message.toString())
+                }
+            }
+        }
+    }
+
+    private fun setupBestProductsRv() {
+        bestProductsAdapter = BestProductAdapter()
+        binding.rvBestProducts.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            adapter = bestProductsAdapter
+        }
+    }
+
+    private fun setupBestDealsRv() {
+        bestDealsAdapter = BestDealsAdapter()
+        binding.rvBestDealsProducts.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = bestDealsAdapter
+        }
     }
 
     private fun setupSpecialProductsRv() {

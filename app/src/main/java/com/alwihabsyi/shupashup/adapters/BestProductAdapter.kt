@@ -1,5 +1,6 @@
 package com.alwihabsyi.shupashup.adapters
 
+import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide
 
 class BestProductAdapter: RecyclerView.Adapter<BestProductAdapter.BestProductViewHolder>() {
     inner class BestProductViewHolder(private val binding: ProductRvItemBinding): RecyclerView.ViewHolder(binding.root){
+        @SuppressLint("SetTextI18n")
         fun onBindView(product: Product){
             binding.apply {
                 Glide.with(itemView).load(product.images[0]).into(imgProduct)

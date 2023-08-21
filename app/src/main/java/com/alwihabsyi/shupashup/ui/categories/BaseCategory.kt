@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alwihabsyi.shupashup.R
 import com.alwihabsyi.shupashup.adapters.BestProductAdapter
 import com.alwihabsyi.shupashup.databinding.FragmentBaseCategoryBinding
+import com.alwihabsyi.shupashup.util.showBottomNavigationView
 
 open class BaseCategory: Fragment() {
 
@@ -47,6 +50,16 @@ open class BaseCategory: Fragment() {
                 onBestProductsPagingRequest()
             }
         })
+
+        bestProductsAdapter.onClick = {
+            val b= Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment, b)
+        }
+
+        offerAdapter.onClick = {
+            val b= Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment, b)
+        }
     }
 
     open fun onOfferPagingRequest() {
@@ -70,6 +83,11 @@ open class BaseCategory: Fragment() {
                 GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
             adapter = bestProductsAdapter
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigationView()
     }
 
 }

@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alwihabsyi.shupashup.R
 import com.alwihabsyi.shupashup.adapters.BestDealsAdapter
 import com.alwihabsyi.shupashup.adapters.BestProductAdapter
 import com.alwihabsyi.shupashup.adapters.SpecialProductsAdapter
@@ -16,6 +18,7 @@ import com.alwihabsyi.shupashup.databinding.FragmentMainCategoryBinding
 import com.alwihabsyi.shupashup.util.Resource
 import com.alwihabsyi.shupashup.util.hide
 import com.alwihabsyi.shupashup.util.show
+import com.alwihabsyi.shupashup.util.showBottomNavigationView
 import com.alwihabsyi.shupashup.util.toast
 import com.alwihabsyi.shupashup.viewmodel.MainCategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +50,21 @@ class MainCategoryFragment : Fragment() {
         setupBestDealsRv()
         setupBestProductsRv()
         observer()
+
+        specialProductsAdapter.onClick = {
+            val b= Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment, b)
+        }
+
+        bestProductsAdapter.onClick = {
+            val b= Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment, b)
+        }
+
+        bestDealsAdapter.onClick = {
+            val b= Bundle().apply { putParcelable("product",it) }
+            findNavController().navigate(R.id.action_homeFragment_to_productDetailFragment, b)
+        }
 
     }
 
@@ -137,6 +155,11 @@ class MainCategoryFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = specialProductsAdapter
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showBottomNavigationView()
     }
 
 }

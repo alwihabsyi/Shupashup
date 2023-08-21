@@ -13,6 +13,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.alwihabsyi.shupashup.R
+import com.alwihabsyi.shupashup.ui.shop.ShoppingActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 fun Fragment.toast(msg: String?){
@@ -55,4 +57,14 @@ fun View.show(){
 
 fun View.hide(){
     visibility = View.INVISIBLE
+}
+
+fun Fragment.hideBottomNavigationView(){
+    val bottomNavigationView = (activity as ShoppingActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
+    bottomNavigationView.visibility = View.GONE
+}
+
+fun Fragment.showBottomNavigationView(){
+    val bottomNavigationView = (activity as ShoppingActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
+    bottomNavigationView.visibility = View.VISIBLE
 }

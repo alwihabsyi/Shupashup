@@ -44,10 +44,6 @@
             app:layout_constraintStart_toEndOf="@id/imageCartProduct"
             app:layout_constraintTop_toTopOf="@id/imageCartProduct"/>
 
-
-
-
-
         <TextView
             android:id="@+id/tvProductCartPrice"
             android:layout_width="wrap_content"
@@ -59,8 +55,6 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/tvProductCartName"
             app:layout_constraintTop_toBottomOf="@id/tvProductCartName"/>
-
-
 
         <ImageView
             android:id="@+id/imagePlus"
@@ -82,10 +76,6 @@
             android:layout_marginEnd="1dp"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-
-
-
-
         <TextView
             android:id="@+id/tvCartProductQuantity"
             android:layout_width="wrap_content"
@@ -95,10 +85,6 @@
             app:layout_constraintEnd_toEndOf="@id/imageMinus"
             app:layout_constraintBottom_toTopOf="@id/imagePlus"
             app:layout_constraintStart_toStartOf="@id/imagePlus"/>
-
-
-
-
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageCartProductColor"
@@ -118,8 +104,6 @@
             app:layout_constraintStart_toEndOf="@id/imageCartProductColor"
             app:layout_constraintTop_toTopOf="@id/imageCartProductColor"/>
 
-
-
         <TextView
             android:id="@+id/tvCartProductSize"
             android:layout_width="wrap_content"
@@ -131,7 +115,6 @@
             app:layout_constraintTop_toTopOf="@id/imageCartProductSize"
             app:layout_constraintStart_toStartOf="@id/imageCartProductSize"
             app:layout_constraintEnd_toEndOf="@id/imageCartProductSize"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -68,7 +68,7 @@ class LoginFragment: Fragment() {
                 is Resource.Loading -> {
                 }
                 is Resource.Success -> {
-                    Snackbar.make(requireView(), it.data, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(requireView(), it.data.toString(), Snackbar.LENGTH_SHORT).show()
                 }
                 is Resource.Error -> {
                     Snackbar.make(requireView(), it.message.toString(), Snackbar.LENGTH_SHORT).show()

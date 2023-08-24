@@ -68,3 +68,14 @@ fun Fragment.showBottomNavigationView(){
     val bottomNavigationView = (activity as ShoppingActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
     bottomNavigationView.visibility = View.VISIBLE
 }
+
+fun Float?.getProductPrice(price: Float): Float{
+    //this --> Percentage
+    if(this == null){
+        return price
+    }
+    val remainingPricePercentage = 1f - this
+    val priceAfterOffer = remainingPricePercentage * price
+
+    return priceAfterOffer
+}

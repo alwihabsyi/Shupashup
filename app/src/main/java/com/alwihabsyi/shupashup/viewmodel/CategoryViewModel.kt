@@ -25,7 +25,7 @@ class CategoryViewModel constructor(
     }
 
     fun fetchOfferProducts() {
-        _offerProduct.value = Resource.Loading
+        _offerProduct.value = Resource.Loading()
         firestore.collection("Products").whereEqualTo("category", category.category)
             .whereNotEqualTo("offerPercentage", null).get()
             .addOnSuccessListener {
@@ -37,7 +37,7 @@ class CategoryViewModel constructor(
             }
     }
     fun fetchBestProducts() {
-        _bestProducts.value = Resource.Loading
+        _bestProducts.value = Resource.Loading()
         firestore.collection("Products").whereEqualTo("category", category.category)
             .whereEqualTo("offerPercentage", null).get()
             .addOnSuccessListener {

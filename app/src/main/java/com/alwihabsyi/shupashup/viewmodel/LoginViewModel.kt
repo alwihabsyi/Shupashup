@@ -31,7 +31,7 @@ class LoginViewModel @Inject constructor(
 
     fun login(email: String, password: String){
         if(checkValidation(email, password)){
-            _login.value = Resource.Loading
+            _login.value = Resource.Loading()
             firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
                     _login.value = Resource.Success("Login success")
@@ -60,13 +60,13 @@ class LoginViewModel @Inject constructor(
     fun resetPassword(email: String) {
 //        viewModelScope.launch {
 //        }
-        _resetPassword.value = Resource.Loading
+        _resetPassword.value = Resource.Loading()
         firebaseAuth.sendPasswordResetEmail(email)
             .addOnSuccessListener {
                 _resetPassword.value = Resource.Success("The password reset link is sent to your email")
             }
             .addOnFailureListener {
-                _resetPassword.value = Resource.Error(it.localizedMessage)
+                _resetPassword.value = Resource.Error(it.message.toString())
             }
     }
 

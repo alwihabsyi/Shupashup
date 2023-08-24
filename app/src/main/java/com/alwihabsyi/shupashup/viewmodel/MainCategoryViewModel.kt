@@ -34,7 +34,7 @@ class MainCategoryViewModel @Inject constructor(
     }
 
     private fun fetchSpecialProducts() {
-        _specialProducts.value = Resource.Loading
+        _specialProducts.value = Resource.Loading()
         firestore.collection("Products").whereEqualTo("category", "Special Products").get()
             .addOnSuccessListener { result ->
                 val specialProductList = result.toObjects(Product::class.java)
@@ -46,7 +46,7 @@ class MainCategoryViewModel @Inject constructor(
     }
 
     fun fetchBestDealsProducts() {
-        _bestDealsProducts.value = Resource.Loading
+        _bestDealsProducts.value = Resource.Loading()
         firestore.collection("Products").whereEqualTo("category", "Best deals").get()
             .addOnSuccessListener { result ->
                 val bestDealsProductsList = result.toObjects(Product::class.java)
@@ -59,7 +59,7 @@ class MainCategoryViewModel @Inject constructor(
 
     fun fetchBestProducts() {
         if (!pagingInfo.isPagingEnd) {
-            _bestProducts.value = Resource.Loading
+            _bestProducts.value = Resource.Loading()
             firestore.collection("Products").limit(pagingInfo.bestProductsPage * 10)
                 .get()
                 .addOnSuccessListener { result ->

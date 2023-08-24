@@ -23,7 +23,7 @@ class DetailsViewModel @Inject constructor(
     val addToCart: LiveData<Resource<CartProduct>> = _addToCart
 
     fun addUpdateProductInCart(cartProduct: CartProduct) {
-        _addToCart.value = Resource.Loading
+        _addToCart.value = Resource.Loading()
         firestore.collection("user")
             .document(auth.uid!!)
             .collection("cart")

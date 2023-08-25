@@ -59,6 +59,10 @@ fun View.hide(){
     visibility = View.INVISIBLE
 }
 
+fun View.gone(){
+    visibility = View.GONE
+}
+
 fun Fragment.hideBottomNavigationView(){
     val bottomNavigationView = (activity as ShoppingActivity).findViewById<BottomNavigationView>(R.id.bottomNavigation)
     bottomNavigationView.visibility = View.GONE

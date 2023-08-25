@@ -146,7 +146,7 @@
             app:spinning_bar_color="@color/white" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layoutCarEmpty"
+            android:id="@+id/layoutCartEmpty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone">

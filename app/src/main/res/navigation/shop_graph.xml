@@ -73,4 +73,9 @@
             android:name="products"
             app:argType="com.alwihabsyi.shupashup.data.CartProduct[]" />
     </fragment>
+    <fragment
+        android:id="@+id/userAccountFragment"
+        android:name="com.alwihabsyi.shupashup.ui.settings.UserAccountFragment"
+        android:label="UserAccountFragment"
+        tools:layout="@layout/fragment_user_account"/>
 </navigation>

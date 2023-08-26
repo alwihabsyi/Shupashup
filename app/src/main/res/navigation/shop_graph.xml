@@ -34,6 +34,15 @@
         <action
             android:id="@+id/action_profileFragment_to_addressFragment"
             app:destination="@id/addressFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_userAccountFragment"
+            app:destination="@id/userAccountFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_billingFragment"
+            app:destination="@id/billingFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -57,7 +66,13 @@
         android:id="@+id/addressFragment"
         android:name="com.alwihabsyi.shupashup.ui.shop.AddressFragment"
         android:label="AddressFragment"
-        tools:layout="@layout/fragment_address"/>
+        tools:layout="@layout/fragment_address">
+        <argument
+            android:name="address"
+            app:argType="com.alwihabsyi.shupashup.data.Address"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/billingFragment"
         android:name="com.alwihabsyi.shupashup.ui.shop.BillingFragment"
@@ -72,10 +87,31 @@
         <argument
             android:name="products"
             app:argType="com.alwihabsyi.shupashup.data.CartProduct[]" />
+        <argument
+            android:name="payment"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/userAccountFragment"
         android:name="com.alwihabsyi.shupashup.ui.settings.UserAccountFragment"
         android:label="UserAccountFragment"
         tools:layout="@layout/fragment_user_account"/>
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.alwihabsyi.shupashup.ui.settings.AllOrdersFragment"
+        android:label="OrdersFragment"
+        tools:layout="@layout/fragment_orders">
+        <action
+            android:id="@+id/action_ordersFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="com.alwihabsyi.shupashup.ui.settings.OrderDetailFragment"
+        android:label="OrderDetailFragment"
+        tools:layout="@layout/fragment_order_detail">
+        <argument
+            android:name="order"
+            app:argType="com.alwihabsyi.shupashup.data.order.Order" />
+    </fragment>
 </navigation>

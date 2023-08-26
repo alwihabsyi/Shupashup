@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.alwihabsyi.shupashup.data.Address
 import com.alwihabsyi.shupashup.databinding.FragmentAddressBinding
 import com.alwihabsyi.shupashup.util.Resource
+import com.alwihabsyi.shupashup.util.gone
 import com.alwihabsyi.shupashup.util.hide
 import com.alwihabsyi.shupashup.util.show
 import com.alwihabsyi.shupashup.util.toast
@@ -21,6 +23,7 @@ class AddressFragment: Fragment() {
 
     private lateinit var binding: FragmentAddressBinding
     val viewModel by viewModels<AddressViewModel>()
+    val args by navArgs<AddressFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +37,20 @@ class AddressFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observer()
+
+        val address = args.address
+        if (address == null){
+            binding.buttonDelelte.gone()
+        }else {
+            binding.apply {
+                edAddressTitle.setText(address.addressTitle)
+                edFullName.setText(address.fullName)
+                edState.setText(address.state)
+                edPhone.setText(address.phone)
+                edCity.setText(address.city)
+                edStreet.setText(address.street)
+            }
+        }
 
         binding.apply {
             buttonSave.setOnClickListener {

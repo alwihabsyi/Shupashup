@@ -21,6 +21,7 @@ import com.alwihabsyi.shupashup.databinding.FragmentBillingBinding
 import com.alwihabsyi.shupashup.util.HorizontalItemDecoration
 import com.alwihabsyi.shupashup.util.Resource
 import com.alwihabsyi.shupashup.util.gone
+import com.alwihabsyi.shupashup.util.hide
 import com.alwihabsyi.shupashup.util.show
 import com.alwihabsyi.shupashup.util.toast
 import com.alwihabsyi.shupashup.viewmodel.BillingViewModel
@@ -64,6 +65,15 @@ class BillingFragment: Fragment() {
         setUpAddressRv()
         observer()
 
+        if (!args.payment) {
+            binding.apply {
+                buttonPlaceOrder.hide()
+                totalBoxContainer.hide()
+                middleLine.hide()
+                bottomLine.hide()
+            }
+        }
+
         binding.imageAddAddress.setOnClickListener {
             findNavController().navigate(R.id.action_billingFragment_to_addressFragment)
         }
@@ -73,6 +83,10 @@ class BillingFragment: Fragment() {
 
         addressAdapter.onClick = {
             selectedAddress = it
+            if (!args.payment){
+                val b = Bundle().apply { putParcelable("address", selectedAddress) }
+                findNavController().navigate(R.id.action_billingFragment_to_addressFragment, b)
+            }
         }
 
         binding.buttonPlaceOrder.setOnClickListener {
